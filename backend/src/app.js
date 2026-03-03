@@ -1,6 +1,5 @@
 import express from 'express'
-import routes from './routes.js'
-import pool from './config/data.js'
+import userRoutes from './routes/userRoutes.js'
 
 class App{
     constructor(){
@@ -15,7 +14,7 @@ class App{
     }
 
     routes(){
-        this.server.use(routes)
+        this.server.use(userRoutes)
     }
 }
 
