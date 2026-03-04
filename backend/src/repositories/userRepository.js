@@ -8,6 +8,14 @@ class userRepository {
 
         return res.rows[0]
     }
+
+    async findByName(username){
+
+        const res = await pool.query('SELECT * FROM users WHERE username = $1', username)
+
+        return res.rows[0]
+
+    }
 }
 
 export default new userRepository()
