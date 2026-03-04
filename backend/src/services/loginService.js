@@ -23,5 +23,5 @@ export default async function login(username, senha) {
 
     const token = jwt.sign({ id: user.id, username: user.username}, process.env.JWT_SECRET, {expiresIn: '7d'})
 
-    return { id: user.id, username: user.username, token}
+    return { user: {id: user.id, username: user.username}, token}
 }
