@@ -1,5 +1,7 @@
 import express from 'express'
+
 import userRoutes from './routes/userRoutes.js'
+import workoutRoutes from './routes/workoutRoutes.js'
 
 class App{
     constructor(){
@@ -15,6 +17,7 @@ class App{
 
     routes(){
         this.server.use(userRoutes)
+        this.server.use(workoutRoutes)
     }
 }
 
