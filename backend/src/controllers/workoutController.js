@@ -1,4 +1,4 @@
-import { createWorkout, editWork, showWorks } from "../services/workoutService.js"
+import { createWorkout, deleteWork, editWork, showWorks } from "../services/workoutService.js"
 
 class workoutController {
 
@@ -35,7 +35,7 @@ class workoutController {
 
         try {
             const { nome } = req.body
-            const {id} = req.params
+            const { id } = req.params
             const id_user = req.userId
 
             const workEdit = await editWork({ nome, id, id_user })
@@ -44,7 +44,20 @@ class workoutController {
         } catch (err) {
             res.status(400).json({ error: err.message })
         }
+    }
 
+    async delete(req, res) {
+        try {
+            const { id } = req.params
+            const id_user = req.userId
+
+            const delWork = await deleteWork({ id, id_user })
+
+            res.status(200).json({ delWork })
+
+        } catch (err) {
+            res.status(400).json({ error: err.message })
+        }
 
     }
 }

@@ -21,6 +21,13 @@ class workoutRepository{
 
         return res.rows[0]
     }
+
+    async deleteWork(work){
+
+        const res = await pool.query('DELETE FROM workouts WHERE id = $1 AND id_user = $2 RETURNING *', [work.id, work.id_user])
+
+        return res.rows[0]
+    }
 }
 
 export default new workoutRepository()

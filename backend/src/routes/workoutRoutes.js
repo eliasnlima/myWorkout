@@ -10,5 +10,6 @@ workoutRoutes.use(auth)
 workoutRoutes.post('/workout', workoutController.create)
 workoutRoutes.get('/workout', workoutController.show)
 workoutRoutes.put('/workout/edit/:id', workoutController.edit)
+workoutRoutes.delete('/workout/delete/:id', workoutController.delete)
 
 export default workoutRoutes

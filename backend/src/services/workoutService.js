@@ -42,3 +42,17 @@ export async function editWork({nome, id, id_user}) {
 
     return workEdit
 }
+
+export async function deleteWork({ id, id_user}) {
+
+    if(!id){
+        throw new Error("Treino não encontrado!")
+    }
+    if(!id_user){
+        throw new Error("Usuário não encontrado!")
+    }
+
+    const workDelete = await workoutRepository.deleteWork({id, id_user})
+
+    return workDelete
+}
