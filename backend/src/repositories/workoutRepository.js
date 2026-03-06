@@ -14,6 +14,13 @@ class workoutRepository{
 
         return res.rows
     }
+
+    async editWork(work){
+
+        const res = await pool.query('UPDATE workouts SET nome = $1 WHERE id = $2 AND id_user = $3 RETURNING *', [work.nome, work.id, work.id_user])
+
+        return res.rows[0]
+    }
 }
 
 export default new workoutRepository()

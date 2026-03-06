@@ -25,3 +25,20 @@ export async function showWorks({id_user}) {
 
     return works
 }
+
+export async function editWork({nome, id, id_user}) {
+    
+    if(!nome){
+        throw new Error("Nome do treino precisa ser preenchido!")
+    }
+    if(!id){
+        throw new Error("Treino não encontrado!")
+    }
+    if(!id_user){
+        throw new Error("Usuário não encontrado!")
+    }
+
+    const workEdit = await workoutRepository.editWork({nome, id, id_user})
+
+    return workEdit
+}

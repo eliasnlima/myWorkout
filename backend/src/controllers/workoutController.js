@@ -1,4 +1,4 @@
-import { createWorkout, showWorks } from "../services/workoutService.js"
+import { createWorkout, editWork, showWorks } from "../services/workoutService.js"
 
 class workoutController {
 
@@ -28,6 +28,23 @@ class workoutController {
         } catch (err) {
             res.status(400).json({ error: err.message })
         }
+
+    }
+
+    async edit(req, res) {
+
+        try {
+            const { nome } = req.body
+            const {id} = req.params
+            const id_user = req.userId
+
+            const workEdit = await editWork({ nome, id, id_user })
+
+            return res.status(200).json({ workEdit })
+        } catch (err) {
+            res.status(400).json({ error: err.message })
+        }
+
 
     }
 }
