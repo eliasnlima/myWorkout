@@ -8,5 +8,6 @@ const workoutRoutes = new Router()
 workoutRoutes.use(auth)
 
 workoutRoutes.post('/workout', workoutController.create)
+workoutRoutes.get('/workouts', workoutController.show)
 
 export default workoutRoutes
