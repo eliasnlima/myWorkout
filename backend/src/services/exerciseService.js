@@ -19,3 +19,19 @@ export async function createEx({nome, id_workout, id_user}) {
 
     return newEx
 }
+
+export async function showEx({id_workout, id_user}) {
+    
+    const workout = await workoutRepository.searchById(id_workout)
+    
+    if(!workout){
+        throw new Error("Treino não encontrado!")
+    }
+    if(workout.id_user !== id_user){
+        throw new Error("Você não tem permissão para acessar os treinos desse exercício!")
+    }
+
+    const ex = await exerciseRepository.showExercise({id_workout})
+
+    return ex
+}

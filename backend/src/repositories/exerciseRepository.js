@@ -7,6 +7,13 @@ class exerciseRepository{
 
         return res.rows[0]
     }
+
+    async showExercise(ex){
+
+        const res = await pool.query('SELECT * FROM exercises WHERE id_workout = $1', [ex.id_workout])
+
+        return res.rows
+    }
 }
 
 export default new exerciseRepository()
