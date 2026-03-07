@@ -1,0 +1,22 @@
+import { createEx } from "../services/exerciseService.js"
+
+class exerciseController {
+
+    async create(req, res) {
+        try {
+            const { nome } = req.body
+            const { id_workout} = req.params
+            const id_user = req.userId
+
+            const exercise = await createEx({nome, id_workout, id_user})
+
+            return res.status(200).json({ exercise })
+        }
+        catch (err) {
+            res.status(400).json({ error: err.message })
+        }
+    }
+}
+
+
+export default new exerciseController()

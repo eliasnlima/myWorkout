@@ -28,6 +28,13 @@ class workoutRepository{
 
         return res.rows[0]
     }
+
+    async searchById(id){
+
+        const res = await pool.query('SELECT * FROM workouts WHERE id= $1', [id])
+
+        return res.rows[0]
+    }
 }
 
 export default new workoutRepository()
