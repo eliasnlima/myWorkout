@@ -1,4 +1,4 @@
-import { createEx, showEx } from "../services/exerciseService.js"
+import { createEx, showEx, deleteEx, editEx } from "../services/exerciseService.js"
 
 class exerciseController {
 
@@ -30,6 +30,35 @@ class exerciseController {
         }
 
     }
+
+    async delete(req, res) {
+        try {
+            const { id, id_workout} = req.params
+            const id_user = req.userId
+
+            const delEx = await deleteEx({ id, id_workout, id_user })
+
+            res.status(200).json({ delEx })
+        } catch (err) {
+            res.status(400).json({ error: err.message })
+        }
+    }
+
+    async edit(req, res) {
+        try {
+            const { id, id_workout } = req.params
+            const id_user = req.userId
+            
+            const {nome} = req.body
+
+            const exercise = await editEx({nome, id, id_workout, id_user })
+
+            res.status(200).json({ exercise })
+        } catch (err) {
+            res.status(400).json({ error: err.message })
+        }
+    }
+
 }
 
 

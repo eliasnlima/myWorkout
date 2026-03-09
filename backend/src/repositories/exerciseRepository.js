@@ -14,6 +14,19 @@ class exerciseRepository{
 
         return res.rows
     }
+
+    async deleteExercise(ex){
+        const res = await pool.query('DELETE FROM exercises WHERE id = $1 AND id_workout = $2 RETURNING *', [ex.id, ex.id_workout])
+
+        return res.rows[0]
+    }
+
+    async editExercise(ex){
+
+        const res = await pool.query("UPDATE exercises SET nome = $1 WHERE id = $2 AND id_workout = $3 RETURNING *", [ex.nome, ex.id, ex.id_workout])
+
+        return res.rows[0]
+    }
 }
 
 export default new exerciseRepository()
