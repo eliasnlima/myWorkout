@@ -33,10 +33,10 @@ class exerciseController {
 
     async delete(req, res) {
         try {
-            const { id, id_workout} = req.params
+            const { id } = req.params
             const id_user = req.userId
 
-            const delEx = await deleteEx({ id, id_workout, id_user })
+            const delEx = await deleteEx({ id, id_user })
 
             res.status(200).json({ delEx })
         } catch (err) {

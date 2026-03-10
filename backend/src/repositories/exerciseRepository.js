@@ -15,8 +15,8 @@ class exerciseRepository{
         return res.rows
     }
 
-    async deleteExercise(ex){
-        const res = await pool.query('DELETE FROM exercises WHERE id = $1 AND id_workout = $2 RETURNING *', [ex.id, ex.id_workout])
+    async deleteExercise(id, id_user){
+        const res = await pool.query('DELETE FROM exercises WHERE id = $1 AND id_workout IN (SELECT id FROM workouts WHERE id_user = $2) RETURNING *', [id, id_user ])
 
         return res.rows[0]
     }
