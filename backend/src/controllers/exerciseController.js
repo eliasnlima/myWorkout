@@ -46,12 +46,11 @@ class exerciseController {
 
     async edit(req, res) {
         try {
-            const { id, id_workout } = req.params
+            const { id } = req.params
             const id_user = req.userId
-            
             const {nome} = req.body
 
-            const exercise = await editEx({nome, id, id_workout, id_user })
+            const exercise = await editEx({nome, id, id_user })
 
             res.status(200).json({ exercise })
         } catch (err) {

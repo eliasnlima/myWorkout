@@ -8,7 +8,6 @@ exRoutes.use(auth)
 exRoutes.post('/workout/exercise/:id_workout', exerciseController.create)
 exRoutes.get('/workout/exercise/:id_workout', exerciseController.show)
 exRoutes.delete('/exercise/:id', exerciseController.delete)
-
-exRoutes.put('/workout/:id_workout/ex/:id/edit', exerciseController.edit)
+exRoutes.put('/exercise/:id', exerciseController.edit)
 
 export default exRoutes

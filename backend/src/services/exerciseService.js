@@ -55,7 +55,7 @@ export async function deleteEx({id, id_user}) {
     return delEx
 }
 
-export async function editEx({nome, id, id_workout, id_user}) {
+export async function editEx({nome, id, id_user}) {
     
     if(!id){
         throw new Error("Id do exercício precisa ser inserido!")
@@ -63,16 +63,11 @@ export async function editEx({nome, id, id_workout, id_user}) {
     if(!nome){
         throw new Error("Nome do exercício precisa ser preenchido!")
     }
-
-    const workout = await workoutRepository.searchById(id_workout)
-    if(!workout){
-        throw new Error("Treino não encontrado!")
-    }
-    if(workout.id_user !== id_user){
-        throw new Error("Você não tem autorização para editar esse treino!")
+    if(!id_user){
+        throw new Error("Id do usuário é necessário!")
     }
 
-    const attEx = await exerciseRepository.editExercise({nome, id, id_workout})
+    const attEx = await exerciseRepository.editExercise(nome, id, id_user)
 
     return attEx
 }

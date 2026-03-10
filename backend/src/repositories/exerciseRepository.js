@@ -21,9 +21,9 @@ class exerciseRepository{
         return res.rows[0]
     }
 
-    async editExercise(ex){
+    async editExercise(nome, id, id_user){
 
-        const res = await pool.query("UPDATE exercises SET nome = $1 WHERE id = $2 AND id_workout = $3 RETURNING *", [ex.nome, ex.id, ex.id_workout])
+        const res = await pool.query("UPDATE exercises SET nome = $1 WHERE id = $2 AND id_workout IN (SELECT id FROM workouts WHERE id_user = $3) RETURNING *", [nome, id, id_user])
 
         return res.rows[0]
     }
