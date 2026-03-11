@@ -27,6 +27,17 @@ class exerciseRepository{
 
         return res.rows[0]
     }
+
+    async findIdAndUser(id, id_user){
+
+        const res = await pool.query(`
+
+        SELECT e.* FROM exercises e
+        JOIN workouts w ON e.id_workout = w.id
+        WHERE e.id = $1 AND w.id_user = $2`, [id, id_user])
+
+        return res.rows[0]
+    }
 }
 
 export default new exerciseRepository()
