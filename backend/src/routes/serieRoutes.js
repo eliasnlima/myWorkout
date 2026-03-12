@@ -3,6 +3,7 @@ import serieController from '../controllers/serieController.js'
 
 const serieRoutes = new Router()
 
-serieRoutes.post("/exercise/:id_exercise", serieController.create)
+serieRoutes.post("/series/:id_exercise", serieController.create)
+serieRoutes.get('/series/:id_exercise', serieController.show)
 
 export default serieRoutes

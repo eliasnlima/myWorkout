@@ -7,6 +7,12 @@ class seriesRepository{
 
         return res.rows[0]
     }
+
+    async showSeries(id){
+        const res = await pool.query("SELECT * FROM series WHERE id_exercise = $1", [id])
+
+        return res.rows
+    }
 }
 
 export default new seriesRepository()

@@ -1,4 +1,4 @@
-import { createSerie } from "../services/seriesService.js"
+import { createSerie, showSeries } from "../services/seriesService.js"
 
 class serieController {
 
@@ -16,6 +16,22 @@ class serieController {
         catch (err) {
             res.status(400).json({ error: err.message })
         }
+    }
+
+    async show(req, res) {
+
+        try {
+            const { id_exercise } = req.params
+            const id_user = req.userId
+
+            const series = await showSeries({ id_exercise, id_user })
+
+            res.status(200).json({ series })
+        }
+        catch (err) {
+            res.status(400).json({ error: err.message })
+        }
+
     }
 }
 
