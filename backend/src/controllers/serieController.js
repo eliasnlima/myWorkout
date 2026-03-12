@@ -1,4 +1,4 @@
-import { createSerie, editSeries, showSeries } from "../services/seriesService.js"
+import { createSerie, deleteSerie, editSeries, showSeries } from "../services/seriesService.js"
 
 class serieController {
 
@@ -37,7 +37,7 @@ class serieController {
     async edit(req, res) {
         try {
             const { id } = req.params
-            const { reps, weight, id_exercise} = req.body
+            const { reps, weight, id_exercise } = req.body
             const id_user = req.userId
 
             const serie = await editSeries({ reps, weight, id, id_exercise, id_user })
@@ -47,6 +47,21 @@ class serieController {
         catch (err) {
             res.status(400).json({ error: err.message })
         }
+    }
+
+    async deleteSerie(req, res) {
+        try {
+            const { id, id_exercise } = req.params
+            const id_user = req.userId
+
+            const serie = await deleteSerie({ id, id_exercise, id_user })
+
+            res.status(200).json({ serie })
+        }
+        catch (err) {
+            res.status(400).json({ error: err.message })
+        }
+
     }
 }
 

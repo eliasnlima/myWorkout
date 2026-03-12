@@ -21,6 +21,13 @@ class seriesRepository{
         return res.rows[0]
     }
 
+    async deleteSeries(id, id_exercise){
+        
+        const res = await pool.query('DELETE FROM series WHERE id = $1 AND id_exercise = $2 RETURNING *', [id, id_exercise])
+
+        return res.rows[0]
+    }
+
 }
 
 export default new seriesRepository()
