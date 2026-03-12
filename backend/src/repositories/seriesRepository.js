@@ -13,6 +13,14 @@ class seriesRepository{
 
         return res.rows
     }
+
+    async editSeries(reps, weight, id, id_exercise){
+        
+        const res = await pool.query('UPDATE series SET reps = $1 , weight = $2 WHERE id = $3 AND id_exercise = $4 RETURNING *', [reps, weight, id, id_exercise])
+
+        return res.rows[0]
+    }
+
 }
 
 export default new seriesRepository()

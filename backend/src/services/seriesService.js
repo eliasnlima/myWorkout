@@ -32,3 +32,19 @@ export async function showSeries({id_exercise, id_user}) {
 
     return serie 
 }
+
+export async function editSeries({reps, weight, id, id_exercise, id_user}) {
+    if(!reps || !weight || !id_exercise || !id){
+        throw new Error("Preencha todos os campos!")
+    }
+
+    const ex = await exerciseRepository.findIdAndUser(id_exercise, id_user)
+
+    if(!ex){
+        throw new Error("Ex não encontrado ou não tem autorização para acessar exercício!")
+    }
+
+    const serie = await seriesRepository.editSeries(reps, weight, id, id_exercise)
+
+    return serie 
+}
