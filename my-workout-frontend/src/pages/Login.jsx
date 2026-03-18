@@ -16,7 +16,7 @@ const Login = () => {
             const data = await login(username, senha);
             console.log("Login realizado com sucesso!", data);
             
-            localStorage.setItem("token", data.token)
+            localStorage.setItem("token", data.newLogin.token)
             navigate("/Dashboard")
 
         } catch (error) {
