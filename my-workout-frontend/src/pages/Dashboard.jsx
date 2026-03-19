@@ -25,7 +25,14 @@ const Dashboard = () => {
         <h1>Meu Dashboard</h1>
         <h2>Treinos</h2>
 
-        <pre>{JSON.stringify(workouts, null, 2)}</pre>
+        <div className="treinos">
+            
+                {workouts.map((item) => (
+                    <div key={item.id} className="treino-item">
+                        <h3>{item.nome}</h3>
+                    </div>
+                ))}
+        </div>
     </>)
 }
 
