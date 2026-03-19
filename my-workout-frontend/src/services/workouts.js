@@ -1,0 +1,21 @@
+import BASE_URL from "./api"
+
+export async function getWorkouts(token) {
+
+    const res = await fetch(`${BASE_URL}/workout`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+
+    if(!res.ok){
+        const dataError = await res.json()
+        throw new Error(dataError.error || "Erro ao buscar treinos!")
+    }
+
+    const data = await res.json()
+
+    return data
+
+}
