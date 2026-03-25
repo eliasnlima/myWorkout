@@ -38,3 +38,19 @@ export async function createWorkout(token, nome) {
     const data = await res.json()
     return data
 }
+
+export async function deleteWorkout(token, workoutId) {
+    const res = await fetch(`${BASE_URL}/workout/delete/${workoutId}`, {
+        method: 'DELETE',
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Erro ao deletar treino!");
+    }
+
+    return res.status !== 204 ? await res.json() : { success: true };
+}

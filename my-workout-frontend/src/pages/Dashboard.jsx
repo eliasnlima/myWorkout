@@ -1,6 +1,6 @@
 import { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-import { getWorkouts } from "../services/workouts";
+import { getWorkouts, deleteWorkout } from "../services/workouts";
 
 const Dashboard = () => {
 
@@ -27,6 +27,24 @@ const Dashboard = () => {
         navigate("/NewWorkout")
     }
 
+    const handleDelete = async (workoutId) => {
+        if (!window.confirm("Tem certeza que deseja excluir este treino? Essa ação não pode ser desfeita.")) {
+            return;
+        }
+
+        try {
+            const token = localStorage.getItem("token");
+            await deleteWorkout(token, workoutId);
+
+            setWorkouts(currentWorkouts => currentWorkouts.filter(workout => workout.id !== workoutId));
+            
+            alert("Treino excluído com sucesso!");
+        } catch (error) {
+            console.error("Erro ao excluir treino:", error);
+            alert(`Falha ao excluir treino: ${error.message}`);
+        }
+    };
+
 
     return (<>
         <div className="top">
@@ -40,6 +58,7 @@ const Dashboard = () => {
                 {workouts.map((item) => (
                     <div key={item.id} className="treino-item">
                         <h3>{item.nome}</h3>
+                        <button className="btn-excluir" onClick={() => handleDelete(item.id)}>Excluir</button>
                     </div>
                 ))}
         </div>
