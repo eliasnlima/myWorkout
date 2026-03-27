@@ -45,6 +45,11 @@ const Dashboard = () => {
         }
     };
 
+    const itemTreino = (id, nome) => {
+
+        navigate(`/Workout/${id}`, {state: {nomeTreino: nome}})
+
+    }
 
     return (<>
         <div className="top">
@@ -56,9 +61,12 @@ const Dashboard = () => {
         <div className="treinos">
             
                 {workouts.map((item) => (
-                    <div key={item.id} className="treino-item">
+                    <div key={item.id} className="treino-item" onClick={ () => itemTreino(item.id, item.nome)}>
                         <h3>{item.nome}</h3>
-                        <button className="btn-excluir" onClick={() => handleDelete(item.id)}>Excluir</button>
+                        <button className="btn-excluir" onClick={(e) => { 
+                            e.stopPropagation(); 
+                            handleDelete(item.id); 
+                        }}>Excluir</button>
                     </div>
                 ))}
         </div>
