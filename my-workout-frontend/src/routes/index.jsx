@@ -15,7 +15,7 @@ const AppRoutes = () => {
                 <Route path="/Dashboard" element={<PrivateRoute>< Dashboard/></PrivateRoute>} />
                 <Route path="/NewWorkout" element={<PrivateRoute><NewWorkout /></PrivateRoute>} />
                 <Route path="/Workout/:id" element={<PrivateRoute><Workout /></PrivateRoute>} />
-                <Route path="/serie/:id_exercise" element={<PrivateRoute><Serie /></PrivateRoute>} />
+                <Route path="/serie/:id" element={<PrivateRoute><Serie /></PrivateRoute>} />
             </Routes>
         </BrowserRouter>
     )

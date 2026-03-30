@@ -66,7 +66,7 @@ const Workout = () => {
     }
 
     const series = (id, nome) => {
-        navigate(`/serie/:${id}`, { state: {nomeExercicio: nome}} )
+        navigate(`/serie/${id}`, { state: {nomeExercicio: nome}} )
     }
 
     return (<>
