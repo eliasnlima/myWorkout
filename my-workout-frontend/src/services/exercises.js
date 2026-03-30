@@ -33,9 +33,25 @@ export async function addExercicio(token, id_workout, nome) {
 
     if(!res.ok){
         const dataError = await res.json()
-        throw new Error("Erro ao adicionar novo exercício!", dataError.error)
+        throw new Error(dataError.error || "Erro ao adicionar novo exercício!")
     }
 
     const data = await res.json()
     return data
+}
+
+export async function deleteExercício(token, id) {
+    const res = await fetch(`${BASE_URL}/exercise/${id}`, {
+        method: 'DELETE',
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Erro ao deletar exercício!");
+    }
+
+    return res.status !== 204 ? await res.json() : { success: true };
 }

@@ -1,7 +1,7 @@
 import { useParams, useLocation, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import { useState } from "react"
-import { getExercises } from "../services/exercises"
+import { deleteExercício, getExercises } from "../services/exercises"
 import { addExercicio } from "../services/exercises"
 
 const Workout = () => {
@@ -47,6 +47,24 @@ const Workout = () => {
 
     }
 
+    const handleDelete = async (id_exercício) => {
+        if(!window.confirm("Deseja excluir esse exercício do treino?")){
+        }
+
+        try {
+            const token = localStorage.getItem("token")
+            const delEx = await deleteExercício(token, id_exercício)
+
+            setExercicios(atual => atual.filter(ex => ex.id !== id))
+            alert("Exercício excluído com sucesso")
+            showEx()
+
+        } catch (error) {
+            console.error(error)
+            alert("Erro ao excluir treino!", error.message)
+        }
+    }
+
     return (<>
         <div className="top">
             <h1>{nomeTreino}</h1>
@@ -63,6 +81,10 @@ const Workout = () => {
             {exercicios?.map((item) => (
                 <div key={item.id} className="ex-item">
                     <h3>{item.nome}</h3>
+                    <button className="btn-excluir" onClick={(e) => { 
+                            e.stopPropagation(); 
+                            handleDelete(item.id); 
+                        }}>Excluir</button>
                 </div>
             ))}
         </div>
