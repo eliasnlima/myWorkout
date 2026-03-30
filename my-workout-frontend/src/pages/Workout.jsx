@@ -65,6 +65,10 @@ const Workout = () => {
         }
     }
 
+    const series = (id, nome) => {
+        navigate(`/serie/:${id}`, { state: {nomeExercicio: nome}} )
+    }
+
     return (<>
         <div className="top">
             <h1>{nomeTreino}</h1>
@@ -79,7 +83,7 @@ const Workout = () => {
         <h2>Exercícios do treino</h2>
         <div className="exercicios">
             {exercicios?.map((item) => (
-                <div key={item.id} className="ex-item">
+                <div key={item.id} className="ex-item" onClick={() => series(item.id, item.nome)}>
                     <h3>{item.nome}</h3>
                     <button className="btn-excluir" onClick={(e) => { 
                             e.stopPropagation(); 

@@ -4,6 +4,7 @@ import Dashboard from "../pages/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import NewWorkout from "../pages/NewWorkout";
 import Workout from "../pages/Workout";
+import Serie from "../pages/Series";
 
 
 const AppRoutes = () => {
@@ -14,6 +15,7 @@ const AppRoutes = () => {
                 <Route path="/Dashboard" element={<PrivateRoute>< Dashboard/></PrivateRoute>} />
                 <Route path="/NewWorkout" element={<PrivateRoute><NewWorkout /></PrivateRoute>} />
                 <Route path="/Workout/:id" element={<PrivateRoute><Workout /></PrivateRoute>} />
+                <Route path="/serie/:id_exercise" element={<PrivateRoute><Serie /></PrivateRoute>} />
             </Routes>
         </BrowserRouter>
     )
