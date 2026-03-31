@@ -38,3 +38,19 @@ export async function getSeries(token, id) {
     return data
 
 }
+
+export async function deleteSerie(token, id_exercise, id) {
+    const res = await fetch(`${BASE_URL}/series/${id_exercise}/${id}`, {
+        method: 'DELETE',
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Erro ao deletar treino!");
+    }
+
+    return res.status !== 204 ? await res.json() : { success: true };
+}

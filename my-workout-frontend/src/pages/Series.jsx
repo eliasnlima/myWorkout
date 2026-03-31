@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useParams, useLocation, useNavigate } from "react-router-dom"
-import { addSerie, getSeries } from "../services/series"
+import { addSerie, getSeries, deleteSerie } from "../services/series"
 import { useEffect } from "react"
 
 
@@ -22,7 +22,7 @@ const Series = () => {
 
     useEffect(() => {
         show()
-    }, [])
+    }, [id]) 
 
 
     const add = async (e) => {
@@ -48,12 +48,29 @@ const Series = () => {
             const token = localStorage.getItem("token")
 
             const data = await getSeries(token, id)
-            setSeries(data.series)
+            setSeries(data.series || []) 
 
         } catch (error) {
             console.error("Erro ao exibir series!" + error.message)
         }
         
+    }
+
+    const handleDelete = async (id_serie) => {
+        if(!window.confirm("Deseja excluir essa série?")){
+            return;
+        }
+
+        try {
+            const token = localStorage.getItem("token")
+            await deleteSerie(token, id, id_serie) 
+
+            setSeries(atual => atual.filter(s => s.id !== id_serie))
+            alert("Série excluída com sucesso")
+        } catch (error) {
+            console.error(error)
+            alert("Erro ao excluir série: " + error.message)
+        }
     }
 
     return (<>
