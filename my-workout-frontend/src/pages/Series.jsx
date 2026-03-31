@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useParams, useLocation, useNavigate } from "react-router-dom"
-import { addSerie } from "../services/series"
+import { addSerie, getSeries } from "../services/series"
+import { useEffect } from "react"
 
 
 const Series = () => {
@@ -19,6 +20,11 @@ const Series = () => {
          navigate(-1)
     }
 
+    useEffect(() => {
+        show()
+    }, [])
+
+
     const add = async (e) => {
         e.preventDefault()
         try {
@@ -26,11 +32,28 @@ const Series = () => {
             const token = localStorage.getItem("token")
             const newSerie = await addSerie(token, id, reps, peso)
             console.log("Série adicionada!", newSerie)
+            setReps("")
+            setPeso("")
+            show()
 
         } catch (error) {
             console.error("Erro ao adicionar série", error)
             alert("Erro: " + error.message)
         }
+    }
+
+    const show = async () => {
+
+        try {
+            const token = localStorage.getItem("token")
+
+            const data = await getSeries(token, id)
+            setSeries(data.series)
+
+        } catch (error) {
+            console.error("Erro ao exibir series!" + error.message)
+        }
+        
     }
 
     return (<>
@@ -50,6 +73,21 @@ const Series = () => {
 
         </div>
         <h2>Séries</h2>
+
+        <div className="series">
+            
+                {series.map((item) => (
+                    <div key={item.id} className="serie-item">
+                        <p>{item.reps} repetições</p>
+                        <p>{item.weight}Kg</p>
+                        <p>{item.data}</p>
+                        <button className="btn-excluir" onClick={(e) => { 
+                            e.stopPropagation(); 
+                            handleDelete(item.id); 
+                        }}>Excluir</button>
+                    </div>
+                ))}
+        </div>
         
     </>)
 }
