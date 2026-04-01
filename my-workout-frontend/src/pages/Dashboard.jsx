@@ -1,6 +1,7 @@
 import { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { getWorkouts, deleteWorkout } from "../services/workouts";
+import "../styles/Dashboard.css";
 
 const Dashboard = () => {
 
@@ -51,26 +52,34 @@ const Dashboard = () => {
 
     }
 
-    return (<>
-        <div className="top">
-        <h1>Meu Dashboard</h1>
-        <button className="btn-novo-treino" onClick={novoTreino}>Novo Treino</button>
-        </div>
-        <h2>Treinos</h2>
+    return (
+        <div className="dashboard-container">
+            <div className="dashboard-content">
+                <div className="top">
+                    <h1>Meu Dashboard</h1>
+                    <button className="btn-novo-treino" onClick={novoTreino}>+ Novo Treino</button>
+                </div>
+                
+                <h2>Meus Treinos</h2>
 
-        <div className="treinos">
-            
-                {workouts.map((item) => (
-                    <div key={item.id} className="treino-item" onClick={ () => itemTreino(item.id, item.nome)}>
-                        <h3>{item.nome}</h3>
-                        <button className="btn-excluir" onClick={(e) => { 
-                            e.stopPropagation(); 
-                            handleDelete(item.id); 
-                        }}>Excluir</button>
-                    </div>
-                ))}
+                <div className="treinos">
+                    {workouts.length === 0 ? (
+                        <p className="empty-message">Nenhum treino cadastrado. Crie um novo!</p>
+                    ) : (
+                        workouts.map((item) => (
+                            <div key={item.id} className="treino-item" onClick={ () => itemTreino(item.id, item.nome)}>
+                                <h3>{item.nome}</h3>
+                                <button className="btn-excluir" onClick={(e) => { 
+                                    e.stopPropagation(); 
+                                    handleDelete(item.id); 
+                                }}>Excluir</button>
+                            </div>
+                        ))
+                    )}
+                </div>
+            </div>
         </div>
-    </>)
+    )
 }
 
 export default Dashboard;
