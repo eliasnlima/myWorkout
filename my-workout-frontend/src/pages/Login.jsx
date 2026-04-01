@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { login } from "../services/auth";
 import { useNavigate} from 'react-router-dom'
+import "../styles/Login.css"
 
 
 const Login = () => {
@@ -25,20 +26,28 @@ const Login = () => {
         }
     }
     
-    return (<>
+    return (
+        <div className="login-container">
+            <div className="login-card">
+                <h2>Bem-vindo ao myWorkout</h2>
+                <p>Faça login para acessar seus treinos</p>
+                
+                <form onSubmit={handleLogin} className="login-form">
+                    <div className="input-group">
+                        <label htmlFor="username">Usuário</label>
+                        <input type="text" id="username" placeholder="Digite seu usuário..." value={username} onChange={(e) => setUsername(e.target.value)} required />
+                    </div>
 
-        <form onSubmit={handleLogin}>
-            <p>Username</p>
-            <input type="text" value={username} onChange={ (e) => {setUsername(e.target.value)}}></input>
+                    <div className="input-group">
+                        <label htmlFor="senha">Senha</label>
+                        <input type="password" id="senha" placeholder="Digite sua senha..." value={senha} onChange={(e) => setSenha(e.target.value)} required />
+                    </div>
 
-            <p>Senha</p>
-            <input type="password" value={senha} onChange={(e) => {setSenha(e.target.value)}}></input>
-
-            <button type="submit">Entrar</button>
-        </form>
-
-
-    </>)
+                    <button type="submit" className="btn-login">Entrar</button>
+                </form>
+            </div>
+        </div>
+    )
 }
 
 
