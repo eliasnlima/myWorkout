@@ -1,0 +1,226 @@
+* {
+    box-sizing: border-box;
+}
+
+.workout-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #141e30, #243b55);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    padding: 60px 20px;
+}
+
+.workout-content {
+    background: rgba(30, 35, 45, 0.95);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 800px;
+    border-top: 5px solid #00c6ff;
+}
+
+.workout-content .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.workout-content .top h1 {
+    color: #ffffff;
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.btn-voltar {
+    padding: 8px 16px;
+    background: transparent;
+    color: #b0b3b8;
+    border: 1px solid #4a505c;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-voltar:hover {
+    background: #2b303b;
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.add-exercise-form {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.add-exercise-form label {
+    width: 100%; 
+    margin-bottom: -2px; 
+    font-weight: 600;
+    font-size: 14px;
+    color: #d1d5db; 
+}
+
+.add-exercise-form input {
+    flex: 1;
+    padding: 12px 15px;
+    background-color: #2b303b;
+    color: #ffffff;
+    border: 1px solid #4a505c;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-exercise-form input:focus {
+    border-color: #00c6ff;
+    box-shadow: 0 0 0 4px rgba(0, 198, 255, 0.2);
+}
+
+.btn-add {
+    padding: 12px 20px;
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 198, 255, 0.3);
+    white-space: nowrap;
+}
+
+.btn-add:hover {
+    background: linear-gradient(45deg, #00b4e6, #0066e6);
+    box-shadow: 0 6px 20px rgba(0, 198, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-add:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+h2 {
+    color: #ffffff;
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #4a505c;
+}
+
+.exercicios {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.empty-message {
+    color: #b0b3b8;
+    font-size: 15px;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.exercise-item {
+    background-color: #2b303b;
+    border: 1px solid #4a505c;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.exercise-item:hover {
+    border-color: #00c6ff;
+    transform: translateX(5px); 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.exercise-item h3 {
+    color: #ffffff;
+    margin: 0;
+    font-size: 18px;
+}
+
+.btn-excluir {
+    padding: 8px 16px;
+    background: linear-gradient(45deg, #ff416c, #ff4b2b); 
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-excluir:hover {
+    background: linear-gradient(45deg, #e6395e, #e64022);
+    box-shadow: 0 4px 15px rgba(255, 65, 108, 0.4);
+    transform: scale(1.05);
+}
+
+
+@media (max-width: 600px) {
+    .workout-container {
+        padding: 20px 15px;
+    }
+
+    .workout-content {
+        padding: 25px 15px;
+    }
+
+    .workout-content .top {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .workout-content .top h1 {
+        font-size: 24px;
+    }
+
+    .btn-voltar {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .add-exercise-form {
+        flex-direction: column;
+    }
+    
+    .btn-add {
+        width: 100%;
+        padding: 14px;
+    }
+
+    .exercise-item {
+        padding: 15px;
+    }
+
+    .exercise-item h3 {
+        font-size: 16px;
+        max-width: 65%; 
+        word-wrap: break-word;
+    }
+
+    .btn-excluir {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}

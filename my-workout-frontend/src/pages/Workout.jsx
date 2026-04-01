@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { deleteExercício, getExercises } from "../services/exercises"
 import { addExercicio } from "../services/exercises"
+import "../styles/Workout.css"
 
 const Workout = () => {
 
@@ -69,30 +70,40 @@ const Workout = () => {
         navigate(`/serie/${id}`, { state: {nomeExercicio: nome}} )
     }
 
-    return (<>
-        <div className="top">
-            <h1>{nomeTreino}</h1>
-            <button onClick={() => navigate("/Dashboard")}>Voltar</button>
-
-            <form onSubmit={handleExercicio}>
-                <input type="text" value={exercicio} onChange={(e) => setExercicio(e.target.value)} />
-                <button type="submit" className="btn-novo-ex">Adicionar Exercício</button>
-            </form>
-
-        </div>
-        <h2>Exercícios do treino</h2>
-        <div className="exercicios">
-            {exercicios?.map((item) => (
-                <div key={item.id} className="ex-item" onClick={() => series(item.id, item.nome)}>
-                    <h3>{item.nome}</h3>
-                    <button className="btn-excluir" onClick={(e) => { 
-                            e.stopPropagation(); 
-                            handleDelete(item.id); 
-                        }}>Excluir</button>
+    return (
+        <div className="workout-container">
+            <div className="workout-content">
+                <div className="top">
+                    <h1>{nomeTreino}</h1>
+                    <button className="btn-voltar" onClick={() => navigate("/Dashboard")}>Voltar</button>
                 </div>
-            ))}
+
+                <form onSubmit={handleExercicio} className="add-exercise-form">
+                    <label htmlFor="exercicio">Adicionar exercício</label>
+                    <input type="text" id="exercicio" placeholder="Nome do novo exercício..." value={exercicio} onChange={(e) => setExercicio(e.target.value)} required />
+                    <button type="submit" className="btn-add">+ Adicionar</button>
+                </form>
+
+                <h2>Exercícios do treino</h2>
+                
+                <div className="exercicios">
+                    {(!exercicios || exercicios.length === 0) ? (
+                        <p className="empty-message">Nenhum exercício cadastrado neste treino.</p>
+                    ) : (
+                        exercicios.map((item) => (
+                            <div key={item.id} className="exercise-item" onClick={() => series(item.id, item.nome)}>
+                                <h3>{item.nome}</h3>
+                                <button className="btn-excluir" onClick={(e) => { 
+                                        e.stopPropagation(); 
+                                        handleDelete(item.id); 
+                                    }}>Excluir</button>
+                            </div>
+                        ))
+                    )}
+                </div>
+            </div>
         </div>
-    </>)
+    )
 }
 
 export default Workout
