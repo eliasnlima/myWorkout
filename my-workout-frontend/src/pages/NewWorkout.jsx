@@ -33,8 +33,8 @@ const NewWorkout = () => {
         <div className="new-workout-container">
             <div className="new-workout-card">
                 <div className="top">
-                    <h1>Criar Novo Treino</h1>
                     <button className="btn-voltar" onClick={dashboard}>Voltar</button>
+                    <h1>Criar Novo Treino</h1>
                 </div>
 
                 <form onSubmit={create} className="new-workout-form">

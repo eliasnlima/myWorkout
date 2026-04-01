@@ -74,8 +74,8 @@ const Workout = () => {
         <div className="workout-container">
             <div className="workout-content">
                 <div className="top">
-                    <h1>{nomeTreino}</h1>
                     <button className="btn-voltar" onClick={() => navigate("/Dashboard")}>Voltar</button>
+                    <h1>{nomeTreino}</h1>
                 </div>
 
                 <form onSubmit={handleExercicio} className="add-exercise-form">

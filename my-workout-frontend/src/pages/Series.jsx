@@ -78,8 +78,8 @@ const Series = () => {
         <div className="series-container">
             <div className="series-content">
                 <div className="top">
-                    <h1>{nomeExercicio}</h1>
                     <button className="btn-voltar" onClick={voltar}>Voltar</button>
+                    <h1>{nomeExercicio}</h1>
                 </div>
 
                 <form onSubmit={add} className="add-series-form">

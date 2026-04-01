@@ -24,9 +24,10 @@
 
 .workout-content .top {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 30px;
+    position: relative;
 }
 
 .workout-content .top h1 {
@@ -34,6 +35,13 @@
     margin: 0;
     font-size: 28px;
     font-weight: 700;
+    text-align: center;
+    padding: 0 80px;
+}
+
+.workout-content .top .btn-voltar {
+    position: absolute;
+    left: 0;
 }
 
 .btn-voltar {
@@ -185,19 +193,18 @@ h2 {
     }
 
     .workout-content .top {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
+        flex-direction: row;
+        align-items: center;
         margin-bottom: 25px;
     }
 
     .workout-content .top h1 {
-        font-size: 24px;
+        font-size: 20px;
+        padding: 0 60px;
     }
 
     .btn-voltar {
-        width: 100%;
-        padding: 12px;
+        padding: 8px 12px;
     }
 
     .add-exercise-form {
