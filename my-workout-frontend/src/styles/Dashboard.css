@@ -156,7 +156,7 @@ h2 {
         word-wrap: break-word;
     }
 
-    .btn-excluir {
+    .treino-item .btn-excluir {
         padding: 8px 12px;
         font-size: 12px;
     }

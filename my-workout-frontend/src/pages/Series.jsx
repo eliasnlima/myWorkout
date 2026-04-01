@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useParams, useLocation, useNavigate } from "react-router-dom"
 import { addSerie, getSeries, deleteSerie } from "../services/series"
 import { useEffect } from "react"
+import "../styles/Series.css"
 
 
 const Series = () => {
@@ -73,40 +74,52 @@ const Series = () => {
         }
     }
 
-    return (<>
-        <div className="top">
-            <h1>{nomeExercicio}</h1>
-            <button onClick={voltar}>Voltar</button>
+    return (
+        <div className="series-container">
+            <div className="series-content">
+                <div className="top">
+                    <h1>{nomeExercicio}</h1>
+                    <button className="btn-voltar" onClick={voltar}>Voltar</button>
+                </div>
 
-            <form onSubmit={add}>
-                <span>Repetições:</span>
-                <input type="text" placeholder="Quantidade de repetições" value={reps} onChange={(e) => setReps(e.target.value)}/><br />
-
-                <span>Peso:</span>
-                <input type="text" placeholder="Peso em kg" value={peso} onChange={(e) => setPeso(e.target.value)}/><br />
-
-                <button type="submit" className="btn-novo-ex">Adicionar Série</button>
-            </form>
-
-        </div>
-        <h2>Séries</h2>
-
-        <div className="series">
-            
-                {series.map((item) => (
-                    <div key={item.id} className="serie-item">
-                        <p>{item.reps} repetições</p>
-                        <p>{item.weight}Kg</p>
-                        <p>{item.data}</p>
-                        <button className="btn-excluir" onClick={(e) => { 
-                            e.stopPropagation(); 
-                            handleDelete(item.id); 
-                        }}>Excluir</button>
+                <form onSubmit={add} className="add-series-form">
+                    <div className="input-group">
+                        <label htmlFor="reps">Repetições</label>
+                        <input type="text" id="reps" placeholder="Ex: 12" value={reps} onChange={(e) => setReps(e.target.value)} required />
                     </div>
-                ))}
+                    
+                    <div className="input-group">
+                        <label htmlFor="peso">Peso (kg)</label>
+                        <input type="text" id="peso" placeholder="Ex: 60" value={peso} onChange={(e) => setPeso(e.target.value)} required />
+                    </div>
+
+                    <button type="submit" className="btn-add">+ Adicionar</button>
+                </form>
+
+                <h2>Séries cadastradas</h2>
+
+                <div className="series-list">
+                    {(!series || series.length === 0) ? (
+                        <p className="empty-message">Nenhuma série cadastrada neste exercício.</p>
+                    ) : (
+                        series.map((item) => (
+                            <div key={item.id} className="serie-item">
+                                <div className="serie-info">
+                                    <p><strong>{item.reps}</strong> repetições</p>
+                                    <p><strong>{item.weight}</strong> kg</p>
+                                    {item.data && <p className="serie-date">{item.data}</p>}
+                                </div>
+                                <button className="btn-excluir" onClick={(e) => { 
+                                    e.stopPropagation(); 
+                                    handleDelete(item.id); 
+                                }}>Excluir</button>
+                            </div>
+                        ))
+                    )}
+                </div>
+            </div>
         </div>
-        
-    </>)
+    )
 }
 
 export default Series

@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-.workout-container {
+.series-container {
     min-height: 100vh;
     background: linear-gradient(135deg, #141e30, #243b55);
     font-family: 'Poppins', sans-serif;
@@ -12,7 +12,7 @@
     padding: 60px 20px;
 }
 
-.workout-content {
+.series-content {
     background: rgba(30, 35, 45, 0.95);
     padding: 40px;
     border-radius: 16px;
@@ -22,14 +22,14 @@
     border-top: 5px solid #00c6ff;
 }
 
-.workout-content .top {
+.series-content .top {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
 }
 
-.workout-content .top h1 {
+.series-content .top h1 {
     color: #ffffff;
     margin: 0;
     font-size: 28px;
@@ -53,23 +53,27 @@
     border-color: #ffffff;
 }
 
-.add-exercise-form {
+.add-series-form {
     display: flex;
-    flex-wrap: wrap; 
-    gap: 10px;
+    gap: 15px;
     margin-bottom: 30px;
+    align-items: flex-end; 
 }
 
-.add-exercise-form label {
-    width: 100%; 
-    margin-bottom: -2px; 
+.input-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1; 
+}
+
+.input-group label {
+    margin-bottom: 8px;
     font-weight: 600;
     font-size: 14px;
-    color: #d1d5db; 
+    color: #d1d5db;
 }
 
-.add-exercise-form input {
-    flex: 1;
+.input-group input {
     padding: 12px 15px;
     background-color: #2b303b;
     color: #ffffff;
@@ -80,13 +84,14 @@
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.add-exercise-form input:focus {
+.input-group input:focus {
     border-color: #00c6ff;
     box-shadow: 0 0 0 4px rgba(0, 198, 255, 0.2);
 }
 
 .btn-add {
     padding: 12px 20px;
+    height: 48px; 
     background: linear-gradient(45deg, #00c6ff, #0072ff);
     color: white;
     border: none;
@@ -119,7 +124,7 @@ h2 {
     border-bottom: 1px solid #4a505c;
 }
 
-.exercicios {
+.series-list {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -132,7 +137,7 @@ h2 {
     padding: 20px 0;
 }
 
-.exercise-item {
+.serie-item {
     background-color: #2b303b;
     border: 1px solid #4a505c;
     border-radius: 12px;
@@ -140,20 +145,36 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer;
     transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.exercise-item:hover {
+.serie-item:hover {
     border-color: #00c6ff;
     transform: translateX(5px); 
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.exercise-item h3 {
-    color: #ffffff;
+.serie-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.serie-info p {
+    color: #e5e7eb;
     margin: 0;
+    font-size: 16px;
+}
+
+.serie-info strong {
+    color: #ffffff;
     font-size: 18px;
+}
+
+.serie-date {
+    color: #9ca3af !important;
+    font-size: 14px !important;
 }
 
 .btn-excluir {
@@ -174,24 +195,24 @@ h2 {
     transform: scale(1.05);
 }
 
-
+/* Responsividade para Celulares */
 @media (max-width: 600px) {
-    .workout-container {
+    .series-container {
         padding: 20px 15px;
     }
 
-    .workout-content {
+    .series-content {
         padding: 25px 15px;
     }
 
-    .workout-content .top {
+    .series-content .top {
         flex-direction: column;
         gap: 15px;
         text-align: center;
         margin-bottom: 25px;
     }
 
-    .workout-content .top h1 {
+    .series-content .top h1 {
         font-size: 24px;
     }
 
@@ -200,27 +221,33 @@ h2 {
         padding: 12px;
     }
 
-    .add-exercise-form {
+    .add-series-form {
         flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
     }
     
     .btn-add {
         width: 100%;
         padding: 14px;
+        height: auto; 
     }
 
-    .exercise-item {
+    .serie-item {
         padding: 15px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
     }
 
-    .exercise-item h3 {
-        font-size: 16px;
-        max-width: 65%; 
-        word-wrap: break-word;
+    .serie-info {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
     }
 
-    .exercise-item .btn-excluir {
-        padding: 8px 12px;
-        font-size: 12px;
+    .serie-item .btn-excluir {
+        width: 100%;
+        padding: 10px;
     }
 }
