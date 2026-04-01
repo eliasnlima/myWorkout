@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { createWorkout } from "../services/workouts"
 import { useNavigate } from "react-router-dom"
+import "../styles/NewWorkout.css"
 
 const NewWorkout = () => {
 
@@ -28,20 +29,25 @@ const NewWorkout = () => {
         navigate("/Dashboard")
     }
 
-    return (<>
-        <div className="top">
-        <h1>Criar novo treino</h1>
-        <button onClick={dashboard}>Voltar</button>
-        </div>
+    return (
+        <div className="new-workout-container">
+            <div className="new-workout-card">
+                <div className="top">
+                    <h1>Criar Novo Treino</h1>
+                    <button className="btn-voltar" onClick={dashboard}>Voltar</button>
+                </div>
 
-        <div>
-            <form onSubmit={create}>
-                <input type="text" placeholder="Nome do treino..." value={nomeTreino} onChange={(e) => setNomeTreino(e.target.value)}></input>
-                <button type="submit">Criar</button>
-                {mensagem && <p className="message">{mensagem}</p>}
-            </form>
+                <form onSubmit={create} className="new-workout-form">
+                    <div className="input-group">
+                        <label htmlFor="nomeTreino">Nome do Treino</label>
+                        <input type="text" id="nomeTreino" placeholder="Ex: Treino A - Peito e Tríceps..." value={nomeTreino} onChange={(e) => setNomeTreino(e.target.value)} required />
+                    </div>
+                    <button type="submit" className="btn-criar">Criar Treino</button>
+                    {mensagem && <p className="success-message">{mensagem}</p>}
+                </form>
+            </div>
         </div>
-    </>)
+    )
 }
 
 export default NewWorkout
