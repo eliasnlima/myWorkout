@@ -14,6 +14,7 @@ const Series = () => {
     const [series, setSeries] = useState([])
     const [reps, setReps] = useState("")
     const [peso, setPeso] = useState("")
+    const [filtroData, setFiltroData] = useState("")
 
     const nomeExercicio = location.state?.nomeExercicio
 
@@ -74,6 +75,19 @@ const Series = () => {
         }
     }
 
+    const formatarData = (dataString) => {
+        if (!dataString) return "";
+        // Divide a string para evitar problemas de fuso horário (YYYY-MM-DD)
+        const [ano, mes, dia] = dataString.split("T")[0].split("-");
+        return `${dia}/${mes}/${ano}`;
+    };
+
+    const datasUnicas = [...new Set(series.map(item => item.data))].filter(Boolean).sort().reverse();
+
+    const seriesFiltradas = filtroData 
+        ? series.filter(item => item.data === filtroData) 
+        : series;
+
     return (
         <div className="series-container">
             <div className="series-content">
@@ -96,18 +110,31 @@ const Series = () => {
                     <button type="submit" className="btn-add">+ Adicionar</button>
                 </form>
 
-                <h2>Séries cadastradas</h2>
+                <div className="series-list-header">
+                    <h2>Histórico</h2>
+                    {series.length > 0 && (
+                        <div className="filter-container">
+                            <label htmlFor="date-select">Filtrar por dia</label>
+                            <select id="date-select" className="filter-select" value={filtroData} onChange={(e) => setFiltroData(e.target.value)}>
+                                <option value="">Exibir Tudo</option>
+                                {datasUnicas.map(data => (
+                                    <option key={data} value={data}>{formatarData(data)}</option>
+                                ))}
+                            </select>
+                        </div>
+                    )}
+                </div>
 
                 <div className="series-list">
-                    {(!series || series.length === 0) ? (
+                    {(seriesFiltradas.length === 0) ? (
                         <p className="empty-message">Nenhuma série cadastrada neste exercício.</p>
                     ) : (
-                        series.map((item) => (
+                        seriesFiltradas.map((item) => (
                             <div key={item.id} className="serie-item">
                                 <div className="serie-info">
                                     <p><strong>{item.reps}</strong> repetições</p>
                                     <p><strong>{item.weight}</strong> kg</p>
-                                    {item.data && <p className="serie-date">{item.data}</p>}
+                                    {item.data && <p className="serie-date">{formatarData(item.data)}</p>}
                                 </div>
                                 <button className="btn-excluir" onClick={(e) => { 
                                     e.stopPropagation(); 
