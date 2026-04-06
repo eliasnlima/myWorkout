@@ -1,4 +1,4 @@
 
-const BASE_URL = "http://localhost:3050"
+const BASE_URL = "https://myworkout-neav.onrender.com"
 
 export default BASE_URL 
