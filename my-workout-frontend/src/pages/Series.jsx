@@ -82,10 +82,10 @@ const Series = () => {
         return `${dia}/${mes}/${ano}`;
     };
 
-    const datasUnicas = [...new Set(series.map(item => item.data))].filter(Boolean).sort().reverse();
+    const datasUnicas = [...new Set(series.map(item => item.data?.split("T")[0]))].filter(Boolean).sort().reverse();
 
     const seriesFiltradas = filtroData 
-        ? series.filter(item => item.data === filtroData) 
+        ? series.filter(item => item.data?.split("T")[0] === filtroData) 
         : series;
 
     return (
