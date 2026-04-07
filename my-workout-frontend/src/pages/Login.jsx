@@ -45,6 +45,11 @@ const Login = () => {
 
                     <button type="submit" className="btn-login">Entrar</button>
                 </form>
+
+                <div className="register-section" style={{ marginTop: '20px', borderTop: '1px solid #4a505c', paddingTop: '20px' }}>
+                    <p style={{ marginBottom: '10px' }}>Não tem uma conta?</p>
+                    <button type="button" className="btn-register" onClick={() => navigate("/NewUser")}>Cadastre-se</button>
+                </div>
             </div>
         </div>
     )
