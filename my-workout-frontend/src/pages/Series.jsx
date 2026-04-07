@@ -77,16 +77,18 @@ const Series = () => {
 
     const formatarData = (dataString) => {
         if (!dataString) return "";
-        // Divide a string para evitar problemas de fuso horário (YYYY-MM-DD)
         const [ano, mes, dia] = dataString.split("T")[0].split("-");
         return `${dia}/${mes}/${ano}`;
     };
 
     const datasUnicas = [...new Set(series.map(item => item.data?.split("T")[0]))].filter(Boolean).sort().reverse();
 
-    const seriesFiltradas = filtroData 
-        ? series.filter(item => item.data?.split("T")[0] === filtroData) 
-        : series;
+    const seriesFiltradas = (filtroData
+        ? series.filter(item => item.data?.split("T")[0] === filtroData)
+        : series
+    ).sort((a, b) => {
+        return new Date(b.data).getTime() - new Date(a.data).getTime();
+    });
 
     return (
         <div className="series-container">
