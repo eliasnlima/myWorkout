@@ -8,10 +8,12 @@ const Login = () => {
 
     const [username, setUsername] = useState("")
     const [senha, setSenha] = useState("")
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
     const handleLogin = async (e) => {
         e.preventDefault()
+        setLoading(true)
 
         try {
             const data = await login(username, senha);
@@ -23,6 +25,8 @@ const Login = () => {
         } catch (error) {
             console.error("Erro capturado:", error);
             alert("Falha: " + error.message);
+        } finally {
+            setLoading(false)
         }
     }
     
@@ -43,7 +47,9 @@ const Login = () => {
                         <input type="password" id="senha" placeholder="Digite sua senha..." value={senha} onChange={(e) => setSenha(e.target.value)} required />
                     </div>
 
-                    <button type="submit" className="btn-login">Entrar</button>
+                    <button type="submit" className="btn-login" disabled={loading}>
+                        {loading ? "Entrando..." : "Entrar"}
+                    </button>
                 </form>
 
                 <div className="register-section" style={{ marginTop: '20px', borderTop: '1px solid #4a505c', paddingTop: '20px' }}>

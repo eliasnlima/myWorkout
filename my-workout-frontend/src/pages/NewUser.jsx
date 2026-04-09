@@ -7,6 +7,7 @@ const NewUser = () => {
     const [username, setUsername] = useState("");
     const [senha, setSenha] = useState("");
     const [confirmarSenha, setConfirmarSenha] = useState("");
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleCadastro = async (e) => {
@@ -17,6 +18,8 @@ const NewUser = () => {
             return;
         }
 
+        setLoading(true);
+
         try {
             await cadastro(username, senha);
             alert("Usuário cadastrado com sucesso!");
@@ -24,6 +27,8 @@ const NewUser = () => {
         } catch (error) {
             console.error("Erro ao cadastrar:", error);
             alert("Erro: " + error.message);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -73,7 +78,9 @@ const NewUser = () => {
                         />
                     </div>
 
-                    <button type="submit" className="btn-login">Finalizar Cadastro</button>
+                    <button type="submit" className="btn-login" disabled={loading}>
+                        {loading ? "Cadastrando..." : "Finalizar Cadastro"}
+                    </button>
                 </form>
             </div>
         </div>
