@@ -6,6 +6,7 @@ import "../styles/Dashboard.css";
 const Dashboard = () => {
 
     const [workouts, setWorkouts] = useState([])
+    const [deletingId, setDeletingId] = useState(null)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -33,6 +34,7 @@ const Dashboard = () => {
             return;
         }
 
+        setDeletingId(workoutId)
         try {
             const token = localStorage.getItem("token");
             await deleteWorkout(token, workoutId);
@@ -43,6 +45,8 @@ const Dashboard = () => {
         } catch (error) {
             console.error("Erro ao excluir treino:", error);
             alert(`Falha ao excluir treino: ${error.message}`);
+        } finally {
+            setDeletingId(null)
         }
     };
 
@@ -69,10 +73,12 @@ const Dashboard = () => {
                         workouts.map((item) => (
                             <div key={item.id} className="treino-item" onClick={ () => itemTreino(item.id, item.nome)}>
                                 <h3>{item.nome}</h3>
-                                <button className="btn-excluir" onClick={(e) => { 
+                                <button className="btn-excluir" disabled={deletingId === item.id} onClick={(e) => { 
                                     e.stopPropagation(); 
                                     handleDelete(item.id); 
-                                }}>Excluir</button>
+                                }}>
+                                    {deletingId === item.id ? "Excluindo..." : "Excluir"}
+                                </button>
                             </div>
                         ))
                     )}

@@ -7,11 +7,13 @@ const NewWorkout = () => {
 
     const [nomeTreino, setNomeTreino] = useState("")
     const [mensagem, setMensagem] = useState("")
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
     const create = async (e) => {
         e.preventDefault()
-
+        setLoading(true)
+        setMensagem("")
         try {
             const token = localStorage.getItem("token")
             const create = await createWorkout(token, nomeTreino)
@@ -22,6 +24,8 @@ const NewWorkout = () => {
         } catch (error) {
             console.error("Erro ao criar treino!", error)
             alert("Falha: ", error.message)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -42,7 +46,9 @@ const NewWorkout = () => {
                         <label htmlFor="nomeTreino">Nome do Treino</label>
                         <input type="text" id="nomeTreino" placeholder="Ex: Treino A - Peito e Tríceps..." value={nomeTreino} onChange={(e) => setNomeTreino(e.target.value)} required />
                     </div>
-                    <button type="submit" className="btn-criar">Criar Treino</button>
+                    <button type="submit" className="btn-criar" disabled={loading}>
+                        {loading ? "Criando..." : "Criar Treino"}
+                    </button>
                     {mensagem && <p className="success-message">{mensagem}</p>}
                 </form>
             </div>

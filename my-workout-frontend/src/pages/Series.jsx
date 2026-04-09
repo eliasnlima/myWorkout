@@ -15,6 +15,8 @@ const Series = () => {
     const [reps, setReps] = useState("")
     const [peso, setPeso] = useState("")
     const [filtroData, setFiltroData] = useState("")
+    const [loadingAdd, setLoadingAdd] = useState(false)
+    const [deletingId, setDeletingId] = useState(null)
 
     const nomeExercicio = location.state?.nomeExercicio
 
@@ -29,6 +31,7 @@ const Series = () => {
 
     const add = async (e) => {
         e.preventDefault()
+        setLoadingAdd(true)
         try {
             
             const token = localStorage.getItem("token")
@@ -41,6 +44,8 @@ const Series = () => {
         } catch (error) {
             console.error("Erro ao adicionar série", error)
             alert("Erro: " + error.message)
+        } finally {
+            setLoadingAdd(false)
         }
     }
 
@@ -63,6 +68,7 @@ const Series = () => {
             return;
         }
 
+        setDeletingId(id_serie)
         try {
             const token = localStorage.getItem("token")
             await deleteSerie(token, id, id_serie) 
@@ -72,6 +78,8 @@ const Series = () => {
         } catch (error) {
             console.error(error)
             alert("Erro ao excluir série: " + error.message)
+        } finally {
+            setDeletingId(null)
         }
     }
 
@@ -109,7 +117,9 @@ const Series = () => {
                         <input type="text" id="peso" placeholder="Ex: 60" value={peso} onChange={(e) => setPeso(e.target.value)} required />
                     </div>
 
-                    <button type="submit" className="btn-add">+ Adicionar</button>
+                    <button type="submit" className="btn-add" disabled={loadingAdd}>
+                        {loadingAdd ? "Adicionando..." : "+ Adicionar"}
+                    </button>
                 </form>
 
                 <div className="series-list-header">
@@ -138,10 +148,12 @@ const Series = () => {
                                     <p><strong>{item.weight}</strong> kg</p>
                                     {item.data && <p className="serie-date">{formatarData(item.data)}</p>}
                                 </div>
-                                <button className="btn-excluir" onClick={(e) => { 
+                                <button className="btn-excluir" disabled={deletingId === item.id} onClick={(e) => { 
                                     e.stopPropagation(); 
                                     handleDelete(item.id); 
-                                }}>Excluir</button>
+                                }}>
+                                    {deletingId === item.id ? "Excluindo..." : "Excluir"}
+                                </button>
                             </div>
                         ))
                     )}

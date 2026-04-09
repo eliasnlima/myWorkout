@@ -13,6 +13,8 @@ const Workout = () => {
 
     const [exercicios, setExercicios] = useState([])
     const [exercicio, setExercicio] = useState("")
+    const [loadingAdd, setLoadingAdd] = useState(false)
+    const [deletingId, setDeletingId] = useState(null)
 
     const nomeTreino = location.state?.nomeTreino || `Treino ${id}`
 
@@ -33,7 +35,7 @@ const Workout = () => {
 
     const handleExercicio = async (e) => {
         e.preventDefault()
-
+        setLoadingAdd(true)
         try {
             const token = localStorage.getItem("token")
             const data = await addExercicio(token, id, exercicio)
@@ -44,14 +46,17 @@ const Workout = () => {
         } catch (error) {
             console.error("Erro ao criar exercício!", error) 
             alert("Falha: ", error.message)
+        } finally {
+            setLoadingAdd(false)
         }
-
     }
 
     const handleDelete = async (id_exercício) => {
         if(!window.confirm("Deseja excluir esse exercício do treino?")){
+            return;
         }
 
+        setDeletingId(id_exercício)
         try {
             const token = localStorage.getItem("token")
             const delEx = await deleteExercício(token, id_exercício)
@@ -63,6 +68,8 @@ const Workout = () => {
         } catch (error) {
             console.error(error)
             alert("Erro ao excluir treino!", error.message)
+        } finally {
+            setDeletingId(null)
         }
     }
 
@@ -81,7 +88,9 @@ const Workout = () => {
                 <form onSubmit={handleExercicio} className="add-exercise-form">
                     <label htmlFor="exercicio">Adicionar exercício</label>
                     <input type="text" id="exercicio" placeholder="Nome do novo exercício..." value={exercicio} onChange={(e) => setExercicio(e.target.value)} required />
-                    <button type="submit" className="btn-add">+ Adicionar</button>
+                    <button type="submit" className="btn-add" disabled={loadingAdd}>
+                        {loadingAdd ? "Adicionando..." : "+ Adicionar"}
+                    </button>
                 </form>
 
                 <h2>Exercícios do treino</h2>
@@ -93,10 +102,12 @@ const Workout = () => {
                         exercicios.map((item) => (
                             <div key={item.id} className="exercise-item" onClick={() => series(item.id, item.nome)}>
                                 <h3>{item.nome}</h3>
-                                <button className="btn-excluir" onClick={(e) => { 
+                                <button className="btn-excluir" disabled={deletingId === item.id} onClick={(e) => { 
                                         e.stopPropagation(); 
                                         handleDelete(item.id); 
-                                    }}>Excluir</button>
+                                    }}>
+                                    {deletingId === item.id ? "Excluindo..." : "Excluir"}
+                                </button>
                             </div>
                         ))
                     )}
