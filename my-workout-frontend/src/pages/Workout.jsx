@@ -71,7 +71,7 @@ const Workout = () => {
     }
 
     return (
-        <div className="workout-container">
+        <div className="workout-container" translate="no">
             <div className="workout-content">
                 <div className="top">
                     <button className="btn-voltar" onClick={() => navigate("/Dashboard")}>Voltar</button>

@@ -91,7 +91,7 @@ const Series = () => {
     });
 
     return (
-        <div className="series-container">
+        <div className="series-container" translate="no">
             <div className="series-content">
                 <div className="top">
                     <button className="btn-voltar" onClick={voltar}>Voltar</button>

@@ -53,7 +53,7 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="dashboard-container">
+        <div className="dashboard-container" translate="no">
             <div className="dashboard-content">
                 <div className="top">
                     <h1>Meu Dashboard</h1>
