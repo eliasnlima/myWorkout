@@ -4,6 +4,16 @@
 
 O `myWorkout` é uma aplicação web completa (Full-Stack) projetada para ajudar usuários a gerenciar e acompanhar seus treinos. Com ele, você pode criar treinos personalizados, adicionar exercícios a cada treino e registrar as séries (repetições e peso) para cada exercício, acompanhando seu progresso ao longo do tempo.
 
+<p align="center">
+  <img src="./assets/my1.png" width="200" alt="Tela do Sistema 1" />
+  &nbsp;
+  <img src="./assets/my2.png" width="200" alt="Tela do Sistema 2" />
+  <br />
+  <img src="./assets/my3.png" width="200" alt="Tela do Sistema 3" />
+  &nbsp;
+  <img src="./assets/my4.png" width="200" alt="Tela do Sistema 4" />
+</p>
+
 ## Funcionalidades
 
 -   **Autenticação de Usuário**:
@@ -57,4 +67,3 @@ Este projeto é uma versão evoluída e melhorada de um trabalho anterior, focad
 Você pode encontrar a versão original em: [[LINK DO PROJETO ANTIGO AQUI](https://github.com/eliasnlima/trainup)]
 
 © 2026 Elias. Todos os direitos reservados.
-
