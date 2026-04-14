@@ -8,7 +8,7 @@ O `myWorkout` é uma aplicação web completa (Full-Stack) projetada para ajudar
   <img src="./assets/my1.png" width="200" alt="Tela do Sistema 1" />
   &nbsp;
   <img src="./assets/my2.png" width="200" alt="Tela do Sistema 2" />
-  <br />
+  &nbsp;
   <img src="./assets/my3.png" width="200" alt="Tela do Sistema 3" />
   &nbsp;
   <img src="./assets/my4.png" width="200" alt="Tela do Sistema 4" />
