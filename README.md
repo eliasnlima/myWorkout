@@ -57,4 +57,4 @@ Este projeto é uma versão evoluída e melhorada de um trabalho anterior, focad
 Você pode encontrar a versão original em: [[LINK DO PROJETO ANTIGO AQUI](https://github.com/eliasnlima/trainup)]
 
 © 2026 Elias. Todos os direitos reservados.
-```
+
